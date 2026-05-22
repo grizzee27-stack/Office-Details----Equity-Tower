@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equity Tower — Investment Fact Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f12;
+    --surface: #161820;
+    --surface-2: #1d1f28;
+    --border: #2a2d3a;
+    --border-light: #33374a;
+    --text: #dde1f0;
+    --text-muted: #6b7194;
+    --text-dim: #9499b8;
+    --gold: #f0c060;
+    --gold-dim: #a07a30;
+    --green: #4adf8a;
+    --green-dim: #1e5e3a;
+    --blue: #60a8f0;
+    --blue-dim: #1e3e6a;
+    --purple: #b060f0;
+    --red: #f06060;
+    --orange: #f0a040;
+    --teal: #40d0c0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', serif;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .wrapper { max-width: 980px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  /* HEADER */
+  .doc-header { border-bottom: 1px solid var(--border); padding-bottom: 28px; margin-bottom: 48px; }
+  .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 3px 9px; display: inline-block;
+  }
+  .badge-gold  { color: var(--gold);   background: rgba(240,192,96,0.1);  border: 1px solid rgba(240,192,96,0.25); }
+  .badge-green { color: var(--green);  background: rgba(74,223,138,0.08); border: 1px solid rgba(74,223,138,0.2); }
+  .badge-blue  { color: var(--blue);   background: rgba(96,168,240,0.08); border: 1px solid rgba(96,168,240,0.2); }
+  .badge-teal  { color: var(--teal);   background: rgba(64,208,192,0.08); border: 1px solid rgba(64,208,192,0.2); }
+  h1.doc-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #f0c060, #f0e0a0, #d0a040);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .doc-subtitle { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 14px; }
+  .meta-row {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-muted); letter-spacing: 0.05em;
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  .meta-row span { color: var(--blue); }
+
+  /* SECTION */
+  .section { margin-bottom: 48px; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    color: var(--text); border-bottom: 1px solid var(--border);
+    padding-bottom: 10px; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .icon-box {
+    width: 22px; height: 22px; background: var(--surface-2);
+    border: 1px solid var(--border-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0;
+  }
+
+  /* SPECS GRID */
+  .specs-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .spec-cell { background: var(--surface); padding: 14px 16px; }
+  .spec-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 8px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 4px;
+  }
+  .spec-val {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--text); line-height: 1.3;
+  }
+  .spec-val.gold   { color: var(--gold); }
+  .spec-val.green  { color: var(--green); }
+  .spec-val.blue   { color: var(--blue); }
+  .spec-val.orange { color: var(--orange); }
+  .spec-val.teal   { color: var(--teal); }
+  .spec-note { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* COMPLEX BLOCKS */
+  .complex-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .complex-block {
+    background: var(--surface); border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .complex-block::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+  .complex-block.gold::before   { background: var(--gold); }
+  .complex-block.blue::before   { background: var(--blue); }
+  .complex-block.green::before  { background: var(--green); }
+  .complex-block.teal::before   { background: var(--teal); }
+  .complex-header {
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+  }
+  .complex-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 8px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .complex-tag.gold  { color: var(--gold); }
+  .complex-tag.blue  { color: var(--blue); }
+  .complex-tag.green { color: var(--green); }
+  .complex-tag.teal  { color: var(--teal); }
+  .complex-body { padding: 14px 16px; }
+  .complex-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 5px 0; border-bottom: 1px solid rgba(42,45,58,0.5);
+    font-size: 12px; color: var(--text-dim);
+  }
+  .complex-item:last-child { border-bottom: none; }
+  .complex-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .dot-gold  { background: var(--gold); }
+  .dot-blue  { background: var(--blue); }
+  .dot-green { background: var(--green); }
+  .dot-teal  { background: var(--teal); }
+  .complex-item strong { color: var(--text); font-weight: 600; }
+
+  /* RETAIL GRID */
+  .retail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+  .retail-card { background: var(--surface); border: 1px solid var(--border); padding: 12px 14px; }
+  .retail-category {
+    font-family: 'JetBrains Mono', monospace; font-size: 7.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px;
+  }
+  .retail-name { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .retail-note { font-size: 11px; color: var(--text-muted); }
+
+  /* SURROUNDING COMMERCIAL */
+  .conn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .conn-pill {
+    background: var(--surface-2); border: 1px solid var(--border-light);
+    padding: 7px 14px; font-size: 12px; color: var(--text-dim);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .conn-pill .dist {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    color: var(--text-muted); letter-spacing: 0.04em;
+  }
+  .conn-pill.mrt { border-color: var(--green-dim); background: rgba(74,223,138,0.05); color: var(--green); }
+  .conn-pill.mrt .dist { color: rgba(74,223,138,0.6); }
+  .conn-pill.bus { border-color: var(--blue-dim); background: rgba(96,168,240,0.05); color: var(--blue); }
+  .conn-pill.bus .dist { color: rgba(96,168,240,0.6); }
+  .conn-pill.shuttle { border-color: rgba(240,192,96,0.3); background: rgba(240,192,96,0.05); color: var(--gold); }
+  .conn-pill.shuttle .dist { color: rgba(240,192,96,0.5); }
+
+  /* STREET BLOCK */
+  .street-block {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 16px 20px; margin-bottom: 14px;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--text-muted); line-height: 1.7; font-style: italic;
+  }
+
+  @media (max-width: 680px) {
+    .wrapper { padding: 28px 18px 60px; }
+    .specs-grid { grid-template-columns: repeat(2, 1fr); }
+    .complex-wrap { grid-template-columns: 1fr; }
+    .retail-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="badge-row">
+      <span class="badge badge-gold">Investment Fact Sheet · Sections 01–03</span>
+      <span class="badge badge-teal">Grade A · SCBD Premium</span>
+      <span class="badge badge-blue">Jl. Sudirman / SCBD Lot 9</span>
+      <span class="badge badge-green">PT PMA Eligible · SHMSRS Strata</span>
+      <span class="badge badge-gold">Kunci Realty · May 2026</span>
+    </div>
+    <h1 class="doc-title">Equity Tower</h1>
+    <p class="doc-subtitle">SCBD Lot 9 — Jl. Jend. Sudirman Kav. 52-53, Senayan, Kebayoran Baru, Jakarta Selatan</p>
+    <div class="meta-row">
+      <div>Developer: <span>PT Danayasa Arthatama Tbk (Artha Graha Group)</span></div>
+      <div>Architect: <span>DP Architects Pte Ltd (Singapore)</span></div>
+      <div>Year Completed: <span>2010</span></div>
+      <div>Postal Code: <span>12190</span></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 01 — BUILDING SPECIFICATIONS ══ -->
+  <div class="section">
+    <div class="section-label">Section 01</div>
+    <h2 class="section-title"><span class="icon-box">⬡</span> Building Specifications</h2>
+    <div class="specs-grid">
+      <div class="spec-cell">
+        <div class="spec-label">Building Grade</div>
+        <div class="spec-val gold">Grade A</div>
+        <div class="spec-note">SCBD — top-tier Jakarta CBD address</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Total Floors</div>
+        <div class="spec-val">44 Floors</div>
+        <div class="spec-note">+ 4 basement levels</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Building Height</div>
+        <div class="spec-val">220 m</div>
+        <div class="spec-note">One of the taller towers in SCBD</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Total Semi-Gross GFA</div>
+        <div class="spec-val gold">80,000+ m²</div>
+        <div class="spec-note">Cushman & Wakefield confirmed</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Typical Floor Plate</div>
+        <div class="spec-val gold">~2,000 m²</div>
+        <div class="spec-note">Semi-gross; marble interior finish</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Lift Zones</div>
+        <div class="spec-val">2 Zones</div>
+        <div class="spec-note">Low (B–29F) · High (30–44F)</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Total Lifts</div>
+        <div class="spec-val">20 Units</div>
+        <div class="spec-note">High-speed + service + executive</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Total Parking</div>
+        <div class="spec-val">954 Lots</div>
+        <div class="spec-note">Dedicated per deed; 4 basement levels</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Certificate Type</div>
+        <div class="spec-val green">SHMSRS</div>
+        <div class="spec-note">Strata title — PT PMA eligible ✓</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Land Title (Underlying)</div>
+        <div class="spec-val green">HGB Murni</div>
+        <div class="spec-note">Developer owns land outright</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">HGB Est. Remaining</div>
+        <div class="spec-val orange">~14–19 yrs</div>
+        <div class="spec-note">Verify issuance date from seller</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Year Completed</div>
+        <div class="spec-val">2010</div>
+        <div class="spec-note">Building age: 15 years</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Façade &amp; Interior</div>
+        <div class="spec-val">Glass + Marble</div>
+        <div class="spec-note">Premium finish; covered linkways</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Strata Available</div>
+        <div class="spec-val green">Yes</div>
+        <div class="spec-note">Both strata &amp; lease offered</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Multi-Function Hall</div>
+        <div class="spec-val teal">Available</div>
+        <div class="spec-note">Rentable event/conference space</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-label">Construction Start</div>
+        <div class="spec-val">2007</div>
+        <div class="spec-note">3-year build by Danayasa Group</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 02 — COMPLEX & COMMERCIAL CONNECTIVITY ══ -->
+  <div class="section">
+    <div class="section-label">Section 02</div>
+    <h2 class="section-title"><span class="icon-box">⬡</span> Complex &amp; Commercial Connectivity</h2>
+
+    <div class="complex-wrap">
+      <div class="complex-block gold">
+        <div class="complex-header">
+          <span class="complex-tag gold">SCBD Master Complex · PT Danayasa Arthatama (same owner as building)</span>
+        </div>
+        <div class="complex-body">
+          <div class="complex-item">
+            <div class="complex-dot dot-gold"></div>
+            <div><strong>Pacific Place Mall</strong> — luxury shopping mall directly within SCBD. Walking distance via covered landscaped linkways. Major retail &amp; F&amp;B anchor for the district.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-gold"></div>
+            <div><strong>Ritz-Carlton Jakarta Pacific Place</strong> — 5-star hotel within SCBD complex. Key business hospitality venue; visiting executives have direct access.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-gold"></div>
+            <div><strong>Alila Jakarta Hotel</strong> — boutique luxury hotel within SCBD. Second hotel option; conference &amp; F&amp;B facilities.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-gold"></div>
+            <div><strong>Indonesia Stock Exchange (IDX / Bursa Efek Indonesia)</strong> — located within SCBD. Draws high-calibre financial sector tenants to the district.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-gold"></div>
+            <div><strong>Artha Graha Building</strong> — adjacent office tower within SCBD, same Danayasa ownership. Shared campus feel.</div>
+          </div>
+        </div>
+      </div>
+      <div class="complex-block blue">
+        <div class="complex-header">
+          <span class="complex-tag blue">Residential &amp; Serviced Apartments · SCBD Catchment</span>
+        </div>
+        <div class="complex-body">
+          <div class="complex-item">
+            <div class="complex-dot dot-blue"></div>
+            <div><strong>Capital Residences</strong> — premium serviced residence within SCBD by Danayasa. International corporate tenant base; direct built-in workforce pool.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-blue"></div>
+            <div><strong>SCBD Suites</strong> — boutique residential apartments within SCBD complex (70 units). Ultra-premium; walking distance to building.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-blue"></div>
+            <div><strong>Kusuma Chandra Apartments</strong> — residential tower within SCBD. Contributes to the live-work-stay ecosystem surrounding Equity Tower.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-blue"></div>
+            <div><strong>18 Parc</strong> — residential development within SCBD masterplan. Danayasa Group portfolio.</div>
+          </div>
+          <div class="complex-item">
+            <div class="complex-dot dot-blue"></div>
+            <div><strong>Grand Lucky Hypermarket</strong> (SCBD Lot 12) — premium supermarket within SCBD serving daily needs of office workers and residents.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retail / Lifestyle Selling Points -->
+    <div class="section-label" style="margin-top:20px; margin-bottom:10px;">Retail &amp; Lifestyle Selling Points — Within &amp; Around Complex</div>
+    <div class="retail-grid">
+      <div class="retail-card">
+        <div class="retail-category">Retail · Walking Distance</div>
+        <div class="retail-name">Pacific Place Mall</div>
+        <div class="retail-note">Luxury anchor; covered linkway from SCBD campus</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">F&amp;B · In-Building</div>
+        <div class="retail-name">Food Court + Canteen</div>
+        <div class="retail-note">Podium level; multi-tenant daily F&amp;B</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">F&amp;B · In-Building</div>
+        <div class="retail-name">Cafés &amp; Restaurants</div>
+        <div class="retail-note">Ground floor; serves Equity tenant base</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">Grocery · SCBD Campus</div>
+        <div class="retail-name">Grand Lucky Hypermarket</div>
+        <div class="retail-note">Premium supermarket; Lot 12, same campus</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">Banking · In-Building</div>
+        <div class="retail-name">ATM Gallery + Banks</div>
+        <div class="retail-note">Ground floor lobby; multiple institutions</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">Events · In-Building</div>
+        <div class="retail-name">Multi-Function Hall</div>
+        <div class="retail-note">Rentable corporate event &amp; conference space</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">Hospitality · SCBD Campus</div>
+        <div class="retail-name">Ritz-Carlton &amp; Alila Hotels</div>
+        <div class="retail-note">Two 5-star options within campus for client meetings</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">Worship · In-Building</div>
+        <div class="retail-name">Masjid / Musholla</div>
+        <div class="retail-note">Dedicated prayer room; in-building facility</div>
+      </div>
+      <div class="retail-card">
+        <div class="retail-category">Retail · Walking Distance</div>
+        <div class="retail-name">FX Sudirman + Plaza Semanggi</div>
+        <div class="retail-note">Additional malls within 10–15 min walk on Jl. Sudirman axis</div>
+      </div>
+    </div>
+
+    <!-- Surrounding Commercial -->
+    <div class="section-label" style="margin-bottom:10px;">Surrounding Commercial (Walking Distance from SCBD)</div>
+    <div class="conn-row">
+      <div class="conn-pill"><strong>Pacific Place Mall</strong><span class="dist">~covered linkway · 2–5 min walk</span></div>
+      <div class="conn-pill"><strong>FX Sudirman</strong><span class="dist">~1 km · 15 min walk on Jl. Sudirman</span></div>
+      <div class="conn-pill"><strong>Plaza Semanggi</strong><span class="dist">~walking distance · via Sudirman axis</span></div>
+      <div class="conn-pill"><strong>Plaza Senayan</strong><span class="dist">~walking distance · via covered paths</span></div>
+      <div class="conn-pill"><strong>IDX / Bursa Efek Indonesia</strong><span class="dist">Within SCBD campus</span></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 03 — STREETS & TRANSPORT ══ -->
+  <div class="section">
+    <div class="section-label">Section 03</div>
+    <h2 class="section-title"><span class="icon-box">⬡</span> Streets, Area &amp; Transport Connectivity</h2>
+
+    <div class="street-block" style="margin-bottom:14px;">
+      <div class="spec-label" style="margin-bottom:8px;">Address &amp; Street Context</div>
+      <div style="font-size:13px; color:var(--text-dim); line-height:1.9;">
+        <strong style="color:var(--text);">Primary address:</strong> SCBD Lot 9, Jl. Jend. Sudirman Kav. 52-53, RT.5/RW.3, Senayan, Kebayoran Baru, Jakarta Selatan 12190<br>
+        <strong style="color:var(--text);">Main frontage:</strong> Jl. Jenderal Sudirman — Jakarta's primary north-south CBD arterial; eight-lane divided highway, prestige address.<br>
+        <strong style="color:var(--text);">Southern access:</strong> Jl. Gatot Subroto — connects to south Jakarta and toll interchange; 5-minute drive via inner SCBD road.<br>
+        <strong style="color:var(--text);">Inner SCBD road system:</strong> Private internal roads managed by PT Danayasa Arthatama; low congestion within campus; free SCBD shuttle circulates.<br>
+        <strong style="color:var(--text);">Senopati access:</strong> Secondary entry from the south via Jl. Senopati — notably exempt from Jakarta's "ganjil-genap" (odd-even plate) traffic restriction, providing all-day access regardless of plate number.<br>
+        <strong style="color:var(--text);">Nearest toll road:</strong> Jakarta Inner Ring Road (~600m from SCBD perimeter) — quick access to Soekarno-Hatta Airport and all radial toll routes.<br>
+        <strong style="color:var(--text);">Administrative area:</strong> Senayan, Kebayoran Baru, Jakarta Selatan — South Jakarta per client brief. ✓ Correct jurisdiction.
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:10px;">Public Transport Access</div>
+    <div class="conn-row">
+      <div class="conn-pill mrt">🚇 MRT Istora Mandiri<span class="dist">~500m from SCBD perimeter · 8–12 min walk to Equity Tower lobby</span></div>
+      <div class="conn-pill shuttle">🚌 Free SCBD Internal Shuttle<span class="dist">Covers MRT gap; circulates within campus</span></div>
+      <div class="conn-pill bus">🚌 Halte Transjakarta Polda Metro Jaya<span class="dist">~500m · Multiple corridors</span></div>
+      <div class="conn-pill bus">🚌 Halte GBK / Gelora Bung Karno<span class="dist">~508–757m · Multiple corridors</span></div>
+    </div>
+
+    <div style="background:var(--surface-2); border:1px solid var(--border); padding:14px 18px; font-size:12px; color:var(--text-muted); line-height:1.75;">
+      <strong style="color:var(--text);">MRT Note:</strong> MRT Istora Mandiri is ~500m from the SCBD perimeter and ~900m to Equity Tower's lobby entrance on Jl. Sudirman (approx. 8–12 min walk). The free SCBD internal shuttle bus effectively bridges this gap — the practical commute from MRT to building entrance is 10–15 min including shuttle wait. By comparison, SCBD is the strongest MRT-connected office precinct in South Jakarta: Istora Mandiri sits directly on the North-South MRT Line (Lebak Bulus ↔ Bundaran HI), connecting workers from Blok M, Senayan, Dukuh Atas, and Bundaran HI without a transfer. Commuter Line: Stasiun Sudirman (~3 km) accessible via MRT interchange at Dukuh Atas BNI.
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    Sections 01–03 only. DD Questions (Q1–Q7), financial model, and risk flags to be added in subsequent memo. All specifications sourced from Cushman &amp; Wakefield Indonesia, JLL Indonesia, KF Map, sewakantorcbd.com, and Wikipedia (building data). NJOP must be obtained directly from Dispenda DKI Jakarta. HGB remaining term is estimated; verify exact certificate from seller/PPAT. This document is prepared for internal use by Kunci Realty and is not financial advice.
+  </div>
+
+</div>
+</body>
+</html>
